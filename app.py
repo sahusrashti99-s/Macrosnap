@@ -1,26 +1,6 @@
-import importlib.metadata as metadata
-import streamlit as st
-
-st.title("MacroSnap Diagnostic")
-
-try:
-    version = metadata.version("google-genai")
-    st.success(f"google-genai is installed: {version}")
-except Exception as e:
-    st.error(f"google-genai is NOT installed: {e}")
-
-try:
-    import google
-    st.write("Google module:", google)
-    st.write("Google path:", list(getattr(google, "__path__", [])))
-except Exception as e:
-    st.error(f"Google import error: {e}")
-
-st.stop()
-#from google import genai
-#from google.genai import types
-
-import json 
+import json
+from google import genai
+from google.genai import types
 import streamlit as st
 
 from twilio.rest import Client as TwilioClient
@@ -59,7 +39,7 @@ def clean_whatsapp_text(text):
 
 
 
-def send_whatsapp(to_number, user_name, summary):
+def send_whatsapp(to_number, name, summary):
     try:
         content_variables = json.dumps(
             {"1": user_name, "2": clean_whatsapp_text(summary)}, ensure_ascii=False
@@ -74,6 +54,8 @@ def send_whatsapp(to_number, user_name, summary):
     except Exception as error:
         return False, str(error)
  
+
+
 
 
 def render_message(message):
