@@ -1,8 +1,8 @@
 import json
-from google import genai
-from google.genai import types
-import streamlit as st
 
+from google import genai
+from google.genai import types  # pyright: ignore[reportMissingImports]
+import streamlit as st
 from twilio.rest import Client as TwilioClient
 
 from prompts import SYSTEM_PROMPT, WELCOME_MESSAGE_TEMPLATE, SUMMARY_REQUEST_PROMPT
@@ -39,7 +39,7 @@ def clean_whatsapp_text(text):
 
 
 
-def send_whatsapp(to_number, name, summary):
+def send_whatsapp(to_number, user_name, summary):
     try:
         content_variables = json.dumps(
             {"1": user_name, "2": clean_whatsapp_text(summary)}, ensure_ascii=False
@@ -54,8 +54,6 @@ def send_whatsapp(to_number, name, summary):
     except Exception as error:
         return False, str(error)
  
-
-
 
 
 def render_message(message):
