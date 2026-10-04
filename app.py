@@ -1,8 +1,15 @@
-import json
+import google
 
+print("GOOGLE MODULE:", google)
+print("GOOGLE PATH:", getattr(google, "__path__", None))
+
+from google import genai
+from google.genai import types
+import json
 from google import genai
 from google.genai import types  # pyright: ignore[reportMissingImports]
 import streamlit as st
+
 from twilio.rest import Client as TwilioClient
 
 from prompts import SYSTEM_PROMPT, WELCOME_MESSAGE_TEMPLATE, SUMMARY_REQUEST_PROMPT
