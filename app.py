@@ -1,10 +1,24 @@
-import google
+import importlib.metadata as metadata
+import streamlit as st
 
-print("GOOGLE MODULE:", google)
-print("GOOGLE PATH:", getattr(google, "__path__", None))
+st.title("MacroSnap Diagnostic")
 
-from google import genai
-from google.genai import types
+try:
+    version = metadata.version("google-genai")
+    st.success(f"google-genai is installed: {version}")
+except Exception as e:
+    st.error(f"google-genai is NOT installed: {e}")
+
+try:
+    import google
+    st.write("Google module:", google)
+    st.write("Google path:", list(getattr(google, "__path__", [])))
+except Exception as e:
+    st.error(f"Google import error: {e}")
+
+st.stop()
+#from google import genai
+#from google.genai import types
 
 import json 
 import streamlit as st
